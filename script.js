@@ -30,10 +30,20 @@ calcStats.onclick = () => {
     document.getElementById("calcStats").disabled = false;
     persons.push(person);
     const li = document.createElement('li');
+    li.id = person.ID;
     const text = `ID: ${person.ID}, First name: ${person.fstName},  Last name: ${person.lstName}, 
     age: ${person.age}`;
-    li.append(document.createTextNode(text));
+    li.append(document.createTextNode(text), createButtonDel());
     personsList.appendChild(li);
+    statsList.innerHTML = '';
+    }
+    function removePersone(ID) {
+        const index = persons.findIndex(p => ID === p.ID.toString());
+        persons.splice(index, 1);
+        if(persons.length === 0){
+            document.getElementById("calcStats").disabled = true;
+        }
+        statsList.innerHTML = '';
     }
 
 function buildElem(stat, str) {
